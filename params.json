@@ -1,0 +1,6 @@
+{
+  "name": "Island Game Project",
+  "tagline": "",
+  "body": "### Bienvenue sur Island Game Project\r\nJe posterai ici l'avancée d'un jeu 3d développé avec Java et OpenGl, et la librairie LWJGL.\r\n\r\n### Le but du projet\r\nDans un premier temps, je ne compte pas faire de gameplay ni de règles du jeu. Il s'agit d'un entrainement complet, pour ce qui s'avère être ma première approche du jeu vidéo. Je compte d'abord développer une île, un personnage, les annimations de celui ci sur son environnement, et bien sur, le moteur graphique pour permettre tout ça.\r\n\r\n### La suite de l'aventure\r\nDans un deuxième temps, j'essairai de faire evoluer ce projet en un jeu completement jouable. Mais ce n'est pas encore d'actualité.\r\n\r\n### Auteur\r\nJe serai seul sur ce projet, et j'afficherai sur cette page les notes de patch et les évolutions à venir.\r\n\r\n",
+  "note": "Don't delete this file! It's used internally to help with page regeneration."
+}
