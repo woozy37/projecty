@@ -39,10 +39,8 @@ public class Loader {
 		try {
 			texture = TextureLoader.getTexture("PNG", new FileInputStream("res/"+fileName+".png"));
 		} catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		
@@ -76,7 +74,7 @@ public class Loader {
 		GL15.glBindBuffer(GL15.GL_ARRAY_BUFFER, vboID);
 		FloatBuffer buffer = storeDataInFloatBuffer(data);
 		GL15.glBufferData(GL15.GL_ARRAY_BUFFER, buffer, GL15.GL_STATIC_DRAW);
-		GL20.glVertexAttribPointer(attributeNumber, 3, GL11.GL_FLOAT, false, 0,0);
+		GL20.glVertexAttribPointer(attributeNumber, coordinateSize, GL11.GL_FLOAT, false, 0,0);
 		GL15.glBindBuffer(GL15.GL_ARRAY_BUFFER, 0);
 	}
 	
