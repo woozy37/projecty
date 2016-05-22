@@ -16,6 +16,8 @@ import renderEngine.MasterRenderer;
 import renderEngine.OBJLoader;
 import terrains.Terrain;
 import textures.ModelTexture;
+import textures.TerrainTexture;
+import textures.TerrainTexturePack;
 
 public class MainGameLoop {
 
@@ -23,9 +25,19 @@ public class MainGameLoop {
 		
 		DisplayManager.createDisplay();
 		Loader loader = new Loader();
-
 		
-		ArrayList<Entity> allEntity = new ArrayList<Entity>();
+		//*******************TERRAIN TEXTURE STUFF******************
+		TerrainTexture backgroundTexture = new TerrainTexture(loader.loadTexture("grass"));
+		TerrainTexture rTexture = new TerrainTexture(loader.loadTexture("sand"));
+		TerrainTexture gTexture = new TerrainTexture(loader.loadTexture("flower"));
+		TerrainTexture bTexture = new TerrainTexture(loader.loadTexture("path"));
+		
+		TerrainTexturePack texturePack = new TerrainTexturePack(backgroundTexture, rTexture, gTexture, bTexture);
+		TerrainTexture blendMap = new TerrainTexture(loader.loadTexture("blendMap"));
+		
+		//*******************************************************
+		
+		
 		RawModel model = OBJLoader.loadObjModel("stall", loader);
 		
 		TexturedModel staticModel  = new TexturedModel(model, new ModelTexture(loader.loadTexture("stallTexture")));
@@ -36,14 +48,18 @@ public class MainGameLoop {
 		ModelTexture texture = staticModel.getTexture();
 		texture.setShineDamper(10);
 		texture.setReflectivity(1);
+		
+		ArrayList<Entity> allEntity = new ArrayList<Entity>();
 		Entity entity = new Entity(staticModel, new Vector3f(0,0,-50),0,0,0,1);
 		Entity herbe = new Entity(grass, new Vector3f(0,0,-40), 0, 0, 0, 1);
 		allEntity.add(herbe);
 		allEntity.add(entity);
+		
+		
 		Light light = new Light(new Vector3f(3000,2000,2000), new Vector3f(1,1,1));
 		
-		Terrain terrain = new Terrain(0,-1,loader,new ModelTexture(loader.loadTexture("grass")));
-		Terrain terrain2 = new Terrain(-1,-1,loader,new ModelTexture(loader.loadTexture("grass")));
+		Terrain terrain = new Terrain(0,-1,loader,texturePack, blendMap);
+		Terrain terrain2 = new Terrain(-1,-1,loader,texturePack, blendMap);
 		
 		Camera camera = new Camera();
 		
