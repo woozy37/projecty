@@ -29,10 +29,16 @@ public class MainGameLoop {
 		RawModel model = OBJLoader.loadObjModel("stall", loader);
 		
 		TexturedModel staticModel  = new TexturedModel(model, new ModelTexture(loader.loadTexture("stallTexture")));
+		TexturedModel grass = new TexturedModel(OBJLoader.loadObjModel("grassModel", loader),
+				new ModelTexture(loader.loadTexture("grassTexture")));
+		grass.getTexture().setHasTransparency(true);
+		grass.getTexture().setUseFakeLighting(true);
 		ModelTexture texture = staticModel.getTexture();
 		texture.setShineDamper(10);
 		texture.setReflectivity(1);
 		Entity entity = new Entity(staticModel, new Vector3f(0,0,-50),0,0,0,1);
+		Entity herbe = new Entity(grass, new Vector3f(0,0,-40), 0, 0, 0, 1);
+		allEntity.add(herbe);
 		allEntity.add(entity);
 		Light light = new Light(new Vector3f(3000,2000,2000), new Vector3f(1,1,1));
 		
