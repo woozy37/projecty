@@ -13,7 +13,7 @@ public class Camera {
 	
 	private static float distanceMinPlayer = 20f;
 	private static float distanceMaxPlayer = 300f;
-	private static float pitchMin = 20;
+	private static float pitchMin = 2;
 	private static float pitchMax = 80;
 	
 	private Vector3f position = new Vector3f(0,1,0);

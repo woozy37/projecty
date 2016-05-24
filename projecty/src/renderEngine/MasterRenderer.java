@@ -59,6 +59,10 @@ public class MasterRenderer {
 		GL11.glDisable(GL11.GL_CULL_FACE);
 	}
 	
+	public Matrix4f getProjectionMatrix(){
+		return projectionMatrix;
+	}
+	
 	public void render(List<Light> lights, Camera camera){
 		prepare();
 		shader.start();
@@ -108,7 +112,6 @@ public class MasterRenderer {
 	
 	private void createProjectionMatrix(){
 		  float aspectRatio = (float)Display.getDisplayMode().getWidth() / (float) Display.getDisplayMode().getHeight();
-
 	      float y_scale = (float) ((1f / Math.tan(Math.toRadians(FOV/2f))) * aspectRatio);
 	      float x_scale = y_scale / aspectRatio;
 	      float frustum_length = FAR_PLANE - NEAR_PLANE;
