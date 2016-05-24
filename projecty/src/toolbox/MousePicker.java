@@ -53,11 +53,6 @@ public class MousePicker {
 	private Vector3f calculateMouseRay() {
 		float mouseY = Mouse.getY();
 		float mouseX = Mouse.getX();
-		
-		System.out.println(mouseX);
-		System.out.println(mouseY);
-		
-		System.out.println();
 		Vector2f normalizedCoords = getNormalisedDeviceCoordinates(mouseX, mouseY);
 		Vector4f clipCoords = new Vector4f(normalizedCoords.x, normalizedCoords.y, -1.0f, 1.0f);
 		Vector4f eyeCoords = toEyeCoords(clipCoords);

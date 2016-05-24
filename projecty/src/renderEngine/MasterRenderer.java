@@ -8,6 +8,7 @@ import java.util.Map;
 import org.lwjgl.opengl.Display;
 import org.lwjgl.opengl.GL11;
 import org.lwjgl.util.vector.Matrix4f;
+import org.lwjgl.util.vector.Vector4f;
 
 import entities.Camera;
 import entities.Entity;
@@ -63,15 +64,30 @@ public class MasterRenderer {
 		return projectionMatrix;
 	}
 	
-	public void render(List<Light> lights, Camera camera){
+	public void renderScene(List<Entity> entities, List<Terrain> terrains, List<Light> lights, Camera camera, Vector4f clipPlane){
+		for(Terrain terrain:terrains){
+			processTerrain(terrain);
+		}
+		for(Entity entity:entities){
+			processEntity(entity);
+		}
+		
+		
+		
+		render(lights,camera, clipPlane);
+	}
+	
+	public void render(List<Light> lights, Camera camera, Vector4f clipPlane){
 		prepare();
 		shader.start();
+		shader.loadClipPlane(clipPlane);
 		shader.loadSkyColour(RED, GREEN, BLUE);
 		shader.loadLight(lights);
 		shader.loadViewMatrix(camera);
 		renderer.render(entities);
 		shader.stop();
 		terrainShader.start();
+		terrainShader.loadClipPlane(clipPlane);
 		terrainShader.loadSkyColour(RED, GREEN, BLUE);
 		terrainShader.loadLight(lights);
 		terrainShader.loadViewMatrix(camera);

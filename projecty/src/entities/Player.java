@@ -1,5 +1,9 @@
 package entities;
 
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 import org.lwjgl.input.Keyboard;
 import org.lwjgl.util.vector.Vector3f;
 
@@ -16,17 +20,32 @@ public class Player extends Entity {
 	
 	private static final float TERRAIN_HEIGHT = 0;
 	
+	
+	
 	private float currentSpeed = 0;
 	private float currentTurnSpeed = 0;
 	private float upwardsSpeed = 0;
 	
 	private boolean isInAir = false;
+	
+	private Terrain[][] bigTerrain;
 
-	public Player(TexturedModel model, Vector3f position, float rotX, float rotY, float rotZ, float scale) {
+
+	public Player(TexturedModel model, List<Terrain> terrains, Vector3f position, float rotX, float rotY, float rotZ, float scale) {
 		super(model, position, rotX, rotY, rotZ, scale);
+		
+		bigTerrain = new Terrain[terrains.size()][terrains.size()];
+		
+		for(Terrain terrain:terrains){
+			bigTerrain[(int) (terrain.getX()/Terrain.SIZE)][(int) (terrain.getZ()/Terrain.SIZE)] = terrain;
+		}
+		
+		
+		
 	}
 	
-	public void move(Terrain terrain){
+	public void move(){
+		
 		checkInputs();
 		super.increaseRotation(0, currentTurnSpeed * DisplayManager.getFrameTimeSeconds(), 0);
 		float distance = currentSpeed * DisplayManager.getFrameTimeSeconds();
@@ -35,6 +54,7 @@ public class Player extends Entity {
 		super.increasePosition(dx, 0, dz);
 		upwardsSpeed += GRAVITY * DisplayManager.getFrameTimeSeconds();
 		super.increasePosition(0, upwardsSpeed * DisplayManager.getFrameTimeSeconds(), 0);
+		Terrain terrain = currentTerrain(super.getPosition().x, super.getPosition().z);
 		float terrainHeight = terrain.getHeightOfTerrain(super.getPosition().x, super.getPosition().z);
 		if(super.getPosition().y<terrainHeight){
 			isInAir = false;
@@ -44,6 +64,12 @@ public class Player extends Entity {
 		
 	}
 	
+	private Terrain currentTerrain(float worldX, float worldZ) {
+		int x = (int) (worldX / Terrain.SIZE);
+		int z = (int) (worldZ / Terrain.SIZE);
+		return bigTerrain[x][z];
+	}
+
 	private void jump(){
 		if(!isInAir){
 		this.upwardsSpeed = JUMP_POWER;}
@@ -62,7 +88,7 @@ public class Player extends Entity {
 		}
 		
 		if(Keyboard.isKeyDown(Keyboard.KEY_LSHIFT)){
-			this.currentSpeed *= 2.4;
+			this.currentSpeed *= 10;
 		}
 		else {
 			this.currentSpeed *= 1;
