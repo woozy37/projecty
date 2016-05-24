@@ -12,7 +12,7 @@ public class Camera {
 	private float angleAroundPLayer = 0;
 	
 	private static float distanceMinPlayer = 20f;
-	private static float distanceMaxPlayer = 120f;
+	private static float distanceMaxPlayer = 300f;
 	private static float pitchMin = 20;
 	private static float pitchMax = 80;
 	

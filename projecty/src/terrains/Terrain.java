@@ -159,4 +159,8 @@ public class Terrain {
 		height *= MAX_HEIGHT;
 		return height;
 	}
+
+	public static float getSize() {
+		return SIZE;
+	}
 }

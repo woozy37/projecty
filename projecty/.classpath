@@ -9,5 +9,6 @@
 		</attributes>
 	</classpathentry>
 	<classpathentry kind="lib" path="C:/Users/17444/Desktop/gittemporary/projecty/lib/jars/slick-util.jar"/>
+	<classpathentry kind="lib" path="C:/Users/17444/Desktop/gittemporary/projecty/lib/jars/PNGDecoder.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
