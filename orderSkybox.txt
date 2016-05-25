@@ -6,3 +6,5 @@ backface
 frontface
 
 camera de surveillance : https://www.youtube.com/watch?v=21UsMuFTN0k&list=PLRIWtICgwaX23jiqVByUs0bqhnalNTNZh&index=2
+
+god rays : http://www.ventuz.com/support/help/V4_06/HowTo/HowToCreateGodRayShader.html
