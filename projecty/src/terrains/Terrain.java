@@ -108,9 +108,9 @@ public class Terrain {
 		for(int i=0;i<VERTEX_COUNT;i++){
 			for(int j=0;j<VERTEX_COUNT;j++){
 				vertices[vertexPointer*3] = (float)j/((float)VERTEX_COUNT - 1) * SIZE;
-				float height = getHeight(j, i, image);
+				float height = getHeight(j, i, image); //passer à 0
 				heights[j][i] = height;
-				vertices[vertexPointer*3+1] = height;
+				vertices[vertexPointer*3+1] = height; 
 				vertices[vertexPointer*3+2] = (float)i/((float)VERTEX_COUNT - 1) * SIZE;
 				Vector3f normal = calculateNormal(j, i, image);
 				normals[vertexPointer*3] = normal.x;
@@ -121,19 +121,37 @@ public class Terrain {
 				vertexPointer++;
 			}
 		}
+		
+		//int currentSquare = 0;
+		
 		int pointer = 0;
 		for(int gz=0;gz<VERTEX_COUNT-1;gz++){
 			for(int gx=0;gx<VERTEX_COUNT-1;gx++){
+				
+				//Decommenter pour avoir un shémas avec diagonales inversées une case sur deux
+				
 				int topLeft = (gz*VERTEX_COUNT)+gx;
 				int topRight = topLeft + 1;
 				int bottomLeft = ((gz+1)*VERTEX_COUNT)+gx;
 				int bottomRight = bottomLeft + 1;
+				//if(currentSquare%2==0){
 				indices[pointer++] = topLeft;
 				indices[pointer++] = bottomLeft;
 				indices[pointer++] = topRight;
 				indices[pointer++] = topRight;
 				indices[pointer++] = bottomLeft;
 				indices[pointer++] = bottomRight;
+				//}
+				//else{
+				//indices[pointer++] = topLeft;
+				//indices[pointer++] = bottomLeft;
+				//indices[pointer++] = topRight;
+				//indices[pointer++] = topRight;
+				//indices[pointer++] = bottomLeft;
+				//indices[pointer++] = bottomRight;
+				//}
+				
+				//currentSquare++;
 			}
 		}
 		return loader.loadToVAO(vertices, textureCoords, normals, indices);
